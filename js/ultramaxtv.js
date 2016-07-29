@@ -259,11 +259,15 @@ function loadTVJS() {
 }
 
 function setAdVolume() {
+    if(!adplayer) return;
+    
     adplayer.unMute();
     adplayer.setVolume(ytplayer.getVolume());
 }
 
 function removeAdVolume() {
+    if(!adplayer) return;
+    
     if (userOnAdArea) return;
 
     adplayer.mute();
