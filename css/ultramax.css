@@ -1,0 +1,203 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,500,700,800);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+.header-inner {padding:0;}.section{margin:0;}.widget{margin:0;float: left;}
+
+
+body {
+    font: 300 14px/1.8 'Raleway', sans-serif;
+}
+
+/* ---------------------------------------------- /*
+ * Transition elsements
+/* ---------------------------------------------- */
+
+
+.navbar a,
+.jc-mouse-hov {
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -ms-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+
+a,
+.btn {
+    -webkit-transition: all 0.125s ease-in-out 0s;
+    -moz-transition: all 0.125s ease-in-out 0s;
+    -ms-transition: all 0.125s ease-in-out 0s;
+    -o-transition: all 0.125s ease-in-out 0s;
+    transition: all 0.125s ease-in-out 0s;
+}
+
+.jc-mouse-hov {letter-spacing: 2px;}
+.jc-mouse-hov:hover {letter-spacing: 4px;}
+
+.jc-mouse-hov.small {letter-spacing: 1px;}
+.jc-mouse-hov.small:hover {letter-spacing: 2px;}
+
+
+/* ---------------------------------------------- /*
+ * Typography
+/* ---------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+    font: 700 40px/1.2 Raleway, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 5px 0 5px;
+    color: #222;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 0 0 30px;
+}
+
+h3 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin: 0 0 5px;
+}
+
+h4 {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+h5 {
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+h6 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+
+.jccontenthld {
+    width: 100%;
+    margin: 0 auto;
+}
+#jcHeader {
+    float: left;
+    background-color: #1F1F1F;
+    width: 100%;
+    color: #FFF;
+}
+#jcBody {
+    float: left;
+    width: 100%;
+}
+#jcFooter {
+    float: left;
+    width: 100%;
+}
+#jcHeader .jcheadlogo {
+    float: left;
+    padding: 5px;
+}
+#jcHeader .menu {
+    float: right;
+    font-size: 18px;
+}
+#jcHeader .menu ul {
+    float: left;
+    padding: 0;
+    margin: 32px 25px;
+    list-style: none;
+}
+#jcHeader .menu ul li {
+    float: left;
+    padding: 5px 10px;
+}
+#jcHeader .menu a {
+    text-decoration:none;
+    color:#FFF;
+}
+#jcHeader .menu a:hover {
+    color:#F5FF01;
+}
+
+#HTML1 {float:right;}
+
+
+.featuresPage {
+    background: #FFF;
+    padding: 20px 5%;
+    width: 90%;
+}
+.featuresPage .fhead h3 {
+    color: #3E434A;
+    font-size: 35px;
+    font-weight: 400;
+    margin: 0 auto;
+    text-align: center;
+}
+.featuresPage .fhead span {
+    color: rgba(101, 101, 101, 0.87);
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 19px;
+    text-align: center;
+}
+.featuresPage .flist {
+    text-align: center;
+}
+
+.featuresPage .flist .grid_4 {
+    width: 270px;
+    display: inline-block;
+    margin: 20px;
+    height: 200px;
+    overflow: hidden;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 122px 0px rgba(150, 150, 150, 1);
+    -moz-box-shadow: 0px 0px 122px 0px rgba(150, 150, 150, 1);
+    box-shadow: 0px 0px 122px 0px rgba(150, 150, 150, 1);
+    
+    position:relative;
+}
+
+.featuresPage .flist .grid_4 strong {
+    background-color: rgba(0, 0, 0, 0.42);
+    color: #FFF;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+.grow:hover {
+    transform: scale(1.1);
+}
+.featuresPage .flist .grid_4 {
+    transition: all .2s ease-in-out;
+}
+.featuresPage .flist .grid_4:hover {
+    transform: scale(1.1);
+}
+
+
+#Blog1 {
+    width: 96%;
+    padding: 2%;
+}
+
+.jc-fullContentHld #Blog1 {width:100%;padding:0;}
+
+
+
+
+
+
