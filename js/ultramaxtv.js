@@ -20,6 +20,8 @@ var pageFixedHeaderHt = 95;
 var pageHeaderHt = pageFixedHeaderHt;
 var playerFixedHt = 0;
 
+var adplayer = false;
+
 function onYouTubeIframeAPIReady() {
 
 
