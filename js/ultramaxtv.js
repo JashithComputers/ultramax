@@ -1,8 +1,8 @@
 console.log("Version: v300");
 
 
-var videoId = JCG_umn_videoId || "9GfbWtNE_Gg"; //"kkIBqOeCnDQ";
-var videopl = JCG_umn_videopl || "PLblpoCXGceknIs1woLzlyk_aj1MV7imiy";
+var videoId = typeof(JCG_umn_videoId)=="undefined" ? "9GfbWtNE_Gg" : JCG_umn_videoId; //"kkIBqOeCnDQ";
+var videopl = typeof(JCG_umn_videopl)=="undefined" ? "PLblpoCXGceknIs1woLzlyk_aj1MV7imiy" : JCG_umn_videopl; //"PLblpoCXGceknIs1woLzlyk_aj1MV7imiy";
 
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
