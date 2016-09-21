@@ -1,7 +1,7 @@
 console.log("Version: v300");
 
 
-var videoId = JCG_umn_videopl || "9GfbWtNE_Gg"; //"kkIBqOeCnDQ";
+var videoId = JCG_umn_videoId || "9GfbWtNE_Gg"; //"kkIBqOeCnDQ";
 var videopl = JCG_umn_videopl || "PLblpoCXGceknIs1woLzlyk_aj1MV7imiy";
 
 var tag = document.createElement('script');
