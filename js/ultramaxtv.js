@@ -48,7 +48,7 @@ function recalcPlayerDimens() {
     if (!isNaN(winWidth)) {
         videoPlayerWidth = winWidth;
 
-        winWidth = winWidth - 160;
+        //winWidth = winWidth - 160;
         //winHt = winHt - 95;
 
         console.log("winWidth: " + winWidth + ", winHt: " + winHt);
