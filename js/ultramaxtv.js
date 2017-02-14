@@ -155,7 +155,7 @@ function onPlayerStateChange(event) {
 
 function onPlayerReady(event) {
     executeVideoPlayer();
-    event.target.setShuffle(true);
+    event.target.setShuffle(false);
     event.target.setPlaybackQuality('highres');
 }
 
@@ -202,7 +202,7 @@ function loadAdPlayer() {
 function onAdPlayerReady(event) {
     event.target.mute();
     event.target.setPlaybackQuality('small');
-    event.target.setShuffle(true);
+    event.target.setShuffle(false);
     executeAd();
 }
 
