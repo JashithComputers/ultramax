@@ -1,11 +1,10 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,500,700,800);
-@import url(http://fonts.googleapis.com/css?family=Lobster);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,800);
 
 .header-inner {padding:0;}.section{margin:0;}.widget{margin:0;float: left;}
 
 
 body {
-    font: 300 14px/1.8 'Raleway', sans-serif;
+    font: 300 14px/1.8 'Roboto', sans-serif;
 }
 
 /* ---------------------------------------------- /*
@@ -43,7 +42,7 @@ a,
 /* ---------------------------------------------- */
 
 h1, h2, h3, h4, h5, h6 {
-    font: 700 40px/1.2 Raleway, sans-serif;
+    font: 700 40px/1.2 Roboto, sans-serif;
     text-transform: uppercase;
     letter-spacing: 5px;
     margin: 5px 0 5px;
