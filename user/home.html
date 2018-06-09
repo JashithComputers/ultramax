@@ -1,0 +1,273 @@
+<script>
+$("body").addClass('jc-fullContentHld');
+</script>
+<style>
+#Blog1 {background: #1F1F1F;}
+#usr-page-hld {
+    float: left;
+    width: 100%;
+    background: #1F1F1F;
+}
+#leftmenu {
+    display:none;
+    float: left;
+    width: 20%;
+    min-height: 1px;
+}
+#assetPage {
+    background: #FFF;
+    float: left;
+    width: 100%;
+    min-height: 200px;
+}
+#assetPage.auth {
+    width: 78%;
+    padding: 1%;
+}
+#leftmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#leftmenu ul li {
+    float: left;
+    width: 100%;
+    cursor: pointer;
+}
+#leftmenu ul li:nth-child(odd) {background: #292828;}
+#leftmenu ul li:nth-child(even) {background: #191919;}
+#leftmenu ul li:hover {
+    background: #21B799;
+}
+#leftmenu ul a {
+    color: #FFF;
+    text-decoration: none;
+    font-weight: 400;
+    float: left;
+    width: 100%;
+    padding: 10px;
+}
+</style>
+
+<div id="usr-page-hld">
+
+<div id="topstrip"></div>
+
+<div id="leftmenu">
+<ul>
+<li><a href="/p/user-page.html">DASHBOARD</a></li>
+<li><a href="/p/user-page.html">VIEW USERS</a></li>
+</ul>
+</div>
+
+<div id="assetPage">
+   <a href="/p/login-page.html">
+     <img style="max-width:200px;margin: 50px;" src="http://static.denimengland.com/images/social_login_btn_google.png" />
+  </a>
+</div>
+
+</div>
+
+<div id="popup" style="display:none;position: fixed;width: 100%;height: 100%;left: 0;top: 0;background: #000000bf;">
+  <button onclick="closePopup();" style="float: right;z-index: 10;position: relative;">Close</button>
+  <iframe style="width:90%;height:90%;position:fixed;top: 5%;left: 5%;background: #FFF;z-index: 1;" 
+          src="#" 
+          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+</div>
+
+
+
+<script src='https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'></script>
+<link href='https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css' rel='stylesheet' />
+
+<style>
+ body {
+  margin: 0;
+  padding: 0;
+ }
+ #assetPage table {
+  font-size: 12px;
+  font-family: arial;
+ }
+</style>
+<script>
+
+$(document).ready(function() {
+    registerAuthCallback({
+        "assetpage_auth_check": function() {
+            if (JCL_firebase.is_auth()) {
+
+                $("#assetPage").addClass('auth').html("Loading...");
+
+                if (JCL_firebase.is_auth()) {
+
+                    firebase.database().ref(JCL_firebase.getDomain() + '/users/' + JCL_firebase.getUID()).once('value').then(function(snapshot) {
+                        var isAdmin = (snapshot.val() && snapshot.val().isAdmin) || false;
+                        console.log(isAdmin);
+
+                        if (isAdmin)
+                            loadAllAssets();
+                        else
+                            showUnAuthAccess();
+                    });
+
+                }
+
+                var welcomemsg = "Welcome " + JCL_firebase.getName();
+
+                welcomemsg += "<button onclick='signout();' style='float:right;'>Signout</button>";
+                $("#topstrip").hide();
+
+                welcomemsg = "";
+                welcomemsg += "<li><a href=\"/p/user-page.html\">Welcome " + JCL_firebase.getName() + "</a></li>";
+                welcomemsg += "<li><a href=\"#\" onclick=\"signout();\">| Logout</a></li>";
+                welcomemsg += "";
+                $("#jcHeader .navbar").html(welcomemsg);
+                $("#jcHeader .jcheadlogo a").attr('href', '/p/user-page.html');
+
+                $("#leftmenu").show();
+
+            } else {
+                //window.top.location = "/p/login-page.html";
+            }
+        }
+    });
+});
+
+
+function showUnAuthAccess() {
+    $("#assetPage").html("Only Admin can view this page. Please contact your admin.");
+}
+
+
+function loadAllAssets() {
+    if (window.__isAllAssetsLoaded) return;
+    window.__isAllAssetsLoaded = true;
+
+    firebase.database().ref(JCL_firebase.getDomain() + '/database/users').once('value').then(function(snapshot) {
+        var usersURL = (snapshot.val()) || "";
+        console.log(usersURL);
+
+        var allBranchAssetURL = usersURL;
+
+        console.log(allBranchAssetURL);
+
+        $.ajax({
+                url: allBranchAssetURL,
+                beforeSend: function(xhr) {
+                    console.log("getting all branch data");
+                    $("#assetPage").html("Loading data...");
+                }
+            })
+            .done(function(data) {
+                console.log("all branch data recevied");
+                buildAllBranchData(data);
+            });
+
+    });
+
+
+}
+
+function buildAllBranchData(data) {
+    console.log(data);
+    var tableHldObj = $("#assetPage");
+
+
+    var tableHtml = "";
+
+    tableHtml += '<table id="assetTable" class="dataTable display cell-border compact hover" cellspacing="0" width="100%">';
+
+    tableHtml += "<thead><tr>";
+    tableHtml += "<th>Unique Id</th>";
+    //tableHtml += "<th>Enable</th>";
+    tableHtml += "<th>User Id</th>";
+    //tableHtml += "<th>Account Reference</th>";
+    tableHtml += "<th>First Name</th>";
+    //tableHtml += "<th>Last Name</th>";
+    tableHtml += "<th>Primary Usage Plan</th>";
+    tableHtml += "<th>Account Validity</th>";
+    //tableHtml += "<th>Auto Login</th>";
+    //tableHtml += "<th>Address</th>";
+    //tableHtml += "<th>Account Creation Day</th>";
+    tableHtml += "<th>Action</th>";
+    tableHtml += "</tr></thead>";
+
+    tableHtml += "<tbody>";
+
+
+    //build row
+    console.log("CHECKING : " + typeof(data));
+
+    data = typeof(data) == "string" ? JSON.parse(data) : data;
+
+    for (var assetIndex in data) {
+        var assetData = data[assetIndex];
+
+        var uId = assetData['Unique Id'];
+        var enableFlag = assetData['Enable'];
+        var userId = assetData['User Id'];
+        var accRef = assetData['Account Reference'];
+        var firstName = assetData['First Name'];
+        var lastName = assetData['Last Name'];
+        var primaryUsagePlan = assetData['Primary Usage Plan'];
+        var accountValidity = assetData['Account Validity'];
+        var autoLogin = assetData['Auto Login'];
+        var address = assetData['Address'];
+        var accountCreationDay = assetData['Account Creation Day'];
+        
+        var params = {
+            uid: uId
+        };
+        var queryStr = $.param(params);
+
+        var actionHtml = "<button onclick='loadUserPopup(\"" + queryStr + "\");'>UPLOAD</button>";
+
+        tableHtml += "<tr>";
+        tableHtml += "<td>" + uId + "</td>";
+        //tableHtml += "<td>" + enableFlag + "</td>";
+        tableHtml += "<td>" + userId + "</td>";
+        //tableHtml += "<td>" + accRef + "</td>";
+        tableHtml += "<td>" + firstName + "</td>";
+        //tableHtml += "<td>" + lastName + "</td>";
+        tableHtml += "<td>" + primaryUsagePlan + "</td>";
+        tableHtml += "<td>" + accountValidity + "</td>";
+        //tableHtml += "<td>" + autoLogin + "</td>";
+        //tableHtml += "<td>" + address + "</td>";
+        //tableHtml += "<td>" + accountCreationDay + "</td>";
+        tableHtml += "<td>" + actionHtml + "</td>";
+        tableHtml += "</tr>";
+
+    }
+
+    //end of rows
+
+    tableHtml += "</tbody>";
+    tableHtml += "</table>";
+
+    tableHldObj.html(tableHtml);
+
+    $(document).ready(function() {
+        $('#assetTable').DataTable({
+            "pageLength": 50,
+            "order": [
+                [0, 'asc']
+            ]
+        });
+    });
+
+}
+
+function loadUserPopup(queryStr) {
+  $(document).ready(function(){
+    var userURL = "http://dev.ultramaxnet.com/model/user/user.php?"+queryStr;
+    console.log(userURL);
+    $("#popup").find("iframe").attr("src",userURL);
+    $("#popup").show();  
+  });
+}
+function closePopup(){
+  $("#popup").hide();
+}
+
+</script>
